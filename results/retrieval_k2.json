@@ -1,0 +1,245 @@
+[
+  {
+    "config": "fixed__bge-small",
+    "k": 2,
+    "n_chunks": 43,
+    "hit@k": 0.971,
+    "recall@k": 0.943,
+    "mrr": 0.914,
+    "latency_ms": 11.298,
+    "recall_by_type": {
+      "confusable": 0.857,
+      "multi": 0.667,
+      "single": 1.0
+    },
+    "misses": [
+      {
+        "id": "q25",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 5.055600020568818,
+        "retrieved_docs": [
+          "product-mesh-router"
+        ],
+        "expected_docs": [
+          "product-mesh-router",
+          "warranty"
+        ]
+      },
+      {
+        "id": "q29",
+        "type": "confusable",
+        "hit": 0.0,
+        "recall": 0.0,
+        "mrr": 0.0,
+        "latency_ms": 6.803399999625981,
+        "retrieved_docs": [
+          "returns-policy"
+        ],
+        "expected_docs": [
+          "open-box-bstock"
+        ]
+      },
+      {
+        "id": "q33",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 5.29240001924336,
+        "retrieved_docs": [
+          "loyalty-program"
+        ],
+        "expected_docs": [
+          "loyalty-program",
+          "shipping"
+        ]
+      }
+    ]
+  },
+  {
+    "config": "fixed__minilm",
+    "k": 2,
+    "n_chunks": 43,
+    "hit@k": 1.0,
+    "recall@k": 0.971,
+    "mrr": 0.929,
+    "latency_ms": 31.85,
+    "recall_by_type": {
+      "confusable": 1.0,
+      "multi": 0.667,
+      "single": 1.0
+    },
+    "misses": [
+      {
+        "id": "q25",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 20.23570000892505,
+        "retrieved_docs": [
+          "product-mesh-router"
+        ],
+        "expected_docs": [
+          "product-mesh-router",
+          "warranty"
+        ]
+      },
+      {
+        "id": "q33",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 13.896699994802475,
+        "retrieved_docs": [
+          "loyalty-program",
+          "returns-policy"
+        ],
+        "expected_docs": [
+          "loyalty-program",
+          "shipping"
+        ]
+      }
+    ]
+  },
+  {
+    "config": "heading__bge-small",
+    "k": 2,
+    "n_chunks": 63,
+    "hit@k": 0.971,
+    "recall@k": 0.929,
+    "mrr": 0.957,
+    "latency_ms": 74.122,
+    "recall_by_type": {
+      "confusable": 0.857,
+      "multi": 0.667,
+      "single": 0.98
+    },
+    "misses": [
+      {
+        "id": "q05",
+        "type": "single",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 197.5897999946028,
+        "retrieved_docs": [
+          "product-smart-lock"
+        ],
+        "expected_docs": [
+          "returns-policy",
+          "product-smart-lock"
+        ]
+      },
+      {
+        "id": "q25",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 34.285200003068894,
+        "retrieved_docs": [
+          "product-mesh-router"
+        ],
+        "expected_docs": [
+          "product-mesh-router",
+          "warranty"
+        ]
+      },
+      {
+        "id": "q26",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 31.526600010693073,
+        "retrieved_docs": [
+          "product-speaker"
+        ],
+        "expected_docs": [
+          "product-speaker",
+          "warranty"
+        ]
+      },
+      {
+        "id": "q31",
+        "type": "confusable",
+        "hit": 0.0,
+        "recall": 0.0,
+        "mrr": 0.0,
+        "latency_ms": 25.30460001435131,
+        "retrieved_docs": [
+          "open-box-bstock"
+        ],
+        "expected_docs": [
+          "price-match"
+        ]
+      }
+    ]
+  },
+  {
+    "config": "heading__minilm",
+    "k": 2,
+    "n_chunks": 63,
+    "hit@k": 1.0,
+    "recall@k": 0.957,
+    "mrr": 0.971,
+    "latency_ms": 44.876,
+    "recall_by_type": {
+      "confusable": 1.0,
+      "multi": 0.667,
+      "single": 0.98
+    },
+    "misses": [
+      {
+        "id": "q05",
+        "type": "single",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 113.42919996241108,
+        "retrieved_docs": [
+          "product-smart-lock"
+        ],
+        "expected_docs": [
+          "returns-policy",
+          "product-smart-lock"
+        ]
+      },
+      {
+        "id": "q25",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 33.13450003042817,
+        "retrieved_docs": [
+          "product-mesh-router"
+        ],
+        "expected_docs": [
+          "product-mesh-router",
+          "warranty"
+        ]
+      },
+      {
+        "id": "q33",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 17.043799976818264,
+        "retrieved_docs": [
+          "shipping"
+        ],
+        "expected_docs": [
+          "loyalty-program",
+          "shipping"
+        ]
+      }
+    ]
+  }
+]

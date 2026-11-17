@@ -1,0 +1,125 @@
+[
+  {
+    "config": "fixed__bge-small",
+    "k": 4,
+    "n_chunks": 43,
+    "hit@k": 1.0,
+    "recall@k": 1.0,
+    "mrr": 0.924,
+    "latency_ms": 12.545,
+    "recall_by_type": {
+      "confusable": 1.0,
+      "multi": 1.0,
+      "single": 1.0
+    },
+    "misses": []
+  },
+  {
+    "config": "fixed__minilm",
+    "k": 4,
+    "n_chunks": 43,
+    "hit@k": 1.0,
+    "recall@k": 1.0,
+    "mrr": 0.929,
+    "latency_ms": 34.81,
+    "recall_by_type": {
+      "confusable": 1.0,
+      "multi": 1.0,
+      "single": 1.0
+    },
+    "misses": []
+  },
+  {
+    "config": "heading__bge-small",
+    "k": 4,
+    "n_chunks": 63,
+    "hit@k": 1.0,
+    "recall@k": 0.971,
+    "mrr": 0.971,
+    "latency_ms": 74.621,
+    "recall_by_type": {
+      "confusable": 1.0,
+      "multi": 0.667,
+      "single": 1.0
+    },
+    "misses": [
+      {
+        "id": "q25",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 33.040400012396276,
+        "retrieved_docs": [
+          "product-mesh-router"
+        ],
+        "expected_docs": [
+          "product-mesh-router",
+          "warranty"
+        ]
+      },
+      {
+        "id": "q26",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 43.4493999928236,
+        "retrieved_docs": [
+          "product-speaker"
+        ],
+        "expected_docs": [
+          "product-speaker",
+          "warranty"
+        ]
+      }
+    ]
+  },
+  {
+    "config": "heading__minilm",
+    "k": 4,
+    "n_chunks": 63,
+    "hit@k": 1.0,
+    "recall@k": 0.971,
+    "mrr": 0.971,
+    "latency_ms": 43.407,
+    "recall_by_type": {
+      "confusable": 1.0,
+      "multi": 0.667,
+      "single": 1.0
+    },
+    "misses": [
+      {
+        "id": "q25",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 26.557500008493662,
+        "retrieved_docs": [
+          "product-mesh-router"
+        ],
+        "expected_docs": [
+          "product-mesh-router",
+          "warranty"
+        ]
+      },
+      {
+        "id": "q33",
+        "type": "multi",
+        "hit": 1.0,
+        "recall": 0.5,
+        "mrr": 1.0,
+        "latency_ms": 12.607200013007969,
+        "retrieved_docs": [
+          "shipping",
+          "payments-financing"
+        ],
+        "expected_docs": [
+          "loyalty-program",
+          "shipping"
+        ]
+      }
+    ]
+  }
+]
