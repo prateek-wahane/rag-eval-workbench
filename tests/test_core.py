@@ -26,6 +26,14 @@ def test_citation_parsing_and_abstention():
     assert not is_abstention("30 days [1].")
 
 
+def test_unanswerable_scored_in_code_not_by_judge():
+    from ragwb.evaluate import _score_unanswerable
+
+    wrong_judge = {"correct": False, "faithful": False, "reason": "judge says no", "judge_cost_usd": 0.0}
+    assert _score_unanswerable(wrong_judge, abstained=True)["correct"] is True
+    assert _score_unanswerable({**wrong_judge, "correct": True}, abstained=False)["correct"] is False
+
+
 def test_golden_set_points_at_real_documents():
     doc_ids = {d.doc_id for d in load_corpus(CORPUS_DIR)}
     for item in load_golden():

@@ -69,7 +69,21 @@ At **k=2** the gaps widen. bge-small drops to 0.86 recall on *confusable* questi
 
 ### Generation
 
-<!-- GENERATION_RESULTS -->
+All 40 questions, answered end to end by a **free local model** (`qwen2.5:3b` via Ollama, CPU only), k=4. Answerable questions were graded by an LLM judge (the same 3B model), and then **every verdict was checked by hand**. Unanswerable questions are scored in code, because the right behaviour there is known exactly.
+
+| Chunking | Correct, hand-checked (35) | Correct, judge only | Says "I don't know" when it should (5) | Wrongly says "I don't know" | Valid citations | p50 latency | Input tokens / answer |
+|---|---|---|---|---|---|---|---|
+| **heading** | **0.83** | 0.91 | 0.80 | **3** | **1.00** | **6.5 s** | **350** |
+| fixed | 0.77 | 0.83 | 1.00 | 5 | 0.97 | 8.7 s | 476 |
+
+**Retrieval recall didn't predict answer quality.** Fixed-window chunks had *higher* recall@4 (1.00 vs 0.97) but produced *worse* answers:
+- **One confident wrong answer** (q31): asked "Can I price-match a B-Stock item?", it said *yes*. The policy excludes B-Stock. This is the costliest kind of failure.
+- **One garbled answer** (q08): a chunk boundary cut the sentence about the 2 PM cut-off in half.
+- **More needless "I don't know" answers** (5 vs 3). The larger, noisier context made the small model give up more often. It also cost 36% more input tokens and 2 s more latency.
+
+Heading chunks failed more safely, but not cleanly: three cautious "I don't know" answers, two answers that dropped the key number (q16, q25), and one off-topic answer to an unanswerable question (q36).
+
+**The judge was the weakest link.** The 3B judge erred in both directions: it passed 5 wrong or incomplete answers, including the wrong "yes" on q31, and failed 3 correct "I don't know" answers. That's 8 errors in 80 verdicts, which is why the hand-checked column is the one to trust. Full review: [`results/manual_review_ollama.md`](results/manual_review_ollama.md). Raw output: [`results/generation_ollama.md`](results/generation_ollama.md).
 
 ## Run it
 
@@ -94,13 +108,14 @@ For a free local LLM, install [Ollama](https://ollama.com) and run `ollama pull 
 ## Limitations (stated honestly)
 
 - The corpus is small (14 docs, 43-63 chunks), so retrieval scores are near their ceiling. The method matters more than the absolute numbers.
-- LLM-as-judge with a 3B local model is noisy. Use a stronger judge (e.g. Claude) for numbers you report, and spot-check judge verdicts by hand.
+- The answer judge is the same 3B local model, and it got 8 of 80 verdicts wrong. The reported numbers are hand-checked, but a stronger judge is needed before this eval can run unattended.
 - No hybrid search, reranking or query rewriting yet. These are the planned next experiments.
 
 ## Roadmap
 
 - [ ] Hybrid retrieval (BM25 + vector) and a cross-encoder reranker, compared with the current eval
-- [ ] Claude vs local model on the same golden set (quality vs $ vs latency)
+- [ ] Claude vs local model on the same golden set (quality vs $ vs latency), with a stronger judge
+- [x] Local-model end-to-end eval, hand-checked (heading 0.83 vs fixed 0.77 correct)
 - [ ] Prompt-injection test documents ("ignore previous instructions...") added to the eval
 - [ ] Streamlit demo UI and a 2-minute demo video
 - [ ] GitHub Actions: run `pytest` + `eval-retrieval` on every push and fail on regression

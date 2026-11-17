@@ -134,6 +134,13 @@ def _judge(judge_llm, item: GoldenItem, ans) -> dict:
     }
 
 
+def _score_unanswerable(verdict: dict, abstained: bool) -> dict:
+    """Unanswerable questions are scored in code: declining is correct and faithful."""
+    if abstained:
+        return {**verdict, "correct": True, "faithful": True, "reason": "correctly declined (scored in code)"}
+    return {**verdict, "correct": False, "reason": f"answered an unanswerable question; judge: {verdict['reason']}"}
+
+
 def eval_generation(config: str, k: int, items: list[GoldenItem], llm, judge_llm, limit: int | None = None) -> dict:
     index = VectorIndex.load(config)
     rows = []
@@ -141,6 +148,9 @@ def eval_generation(config: str, k: int, items: list[GoldenItem], llm, judge_llm
         ans = answer(item.question, index, llm, k)
         verdict = _judge(judge_llm, item, ans)
         answerable = bool(item.expected_docs)
+        if not answerable:
+            # The right behaviour is known exactly, so don't trust a (possibly small) judge with it.
+            verdict = _score_unanswerable(verdict, ans.abstained)
         rows.append({
             "id": item.id,
             "type": item.type,

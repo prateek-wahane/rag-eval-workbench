@@ -14,6 +14,7 @@ Measure both against the golden set (`results/retrieval_k*.md`) and keep both in
 - Heading-aware has the best **MRR** (0.96-0.97): the right document ranks first more often, which reduces noise in the prompt.
 - Fixed-window has better **recall on multi-document questions** at k=4, because its larger windows bring in neighbouring facts.
 - Neither solves multi-hop at k=2 (0.67 recall on multi-document questions).
+- **End to end, heading wins** (`results/manual_review_ollama.md`, qwen2.5:3b, k=4, hand-checked): 0.83 vs 0.77 correct, 350 vs 476 input tokens, and no confident wrong answers. Fixed-window's extra recall arrived as noisy context: one wrong "yes" on a B-Stock price-match question, one answer garbled by a chunk boundary, and more needless "I don't know" answers. Retrieval recall alone was the wrong metric to choose by.
 
 ## Consequences / next steps
 - Default to `heading` for precision, with k=4.
